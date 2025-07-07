@@ -23,7 +23,8 @@ public class BaseSteps {
 		coptions.addArguments("disable-popup-blocking");
 		
 		  driver = new ChromeDriver(coptions);
-		  driver.get("https://www.nobroker.in/"); 
+		  //driver.get("https://www.nobroker.in/"); 
+		  driver.get("https://www.nobroker.in/property/sale/pune/Hinjawadi?searchParam=W3sibGF0IjoxOC41OTEyNzE2LCJsb24iOjczLjczODkwODk5OTk5OTk5LCJwbGFjZUlkIjoiQ2hJSjd4c0VTTUM3d2pzUjVkN0R3MXJyeWRBIiwicGxhY2VOYW1lIjoiSGluamF3YWRpIn1d&radius=2.0&type=BHK2&propertyAge=0&city=pune&locality=Hinjawadi");
 		
 		return driver;
 	}

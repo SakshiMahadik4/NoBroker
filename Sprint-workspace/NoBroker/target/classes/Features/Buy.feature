@@ -1,5 +1,6 @@
 Feature: Property Search and Interaction on Buy Page
 
+
 @valid
   Scenario: Verify property search by valid city, locality, BHK type, and property status
     Given the user is on the Buy page
@@ -21,8 +22,9 @@ Feature: Property Search and Interaction on Buy Page
 @contact
   Scenario: Verify user can contact owner using Get Owner Details button
     Given the user is logged in and viewing a property listing
-    When the user clicks the "Get Owner Details" button
-    Then the owner's contact information should be displayed
+    When the user clicks the Get Owner Details button
+    And the login Page will be display enter details
+    Then the owners contact information should be displayed
 
 @wishlist
   Scenario: Verify user can wishlist a property
@@ -39,6 +41,7 @@ Feature: Property Search and Interaction on Buy Page
     Then the visit should be scheduled and confirmation should be shown
 
 @invalid
+
   Scenario: Verify unregistered user cannot contact owner or wishlist a property
     Given the user is not logged in and viewing a property listing
     When the user tries to contact owner or wishlist the property

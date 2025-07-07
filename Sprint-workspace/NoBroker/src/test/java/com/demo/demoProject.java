@@ -1,5 +1,8 @@
 package com.demo;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
 
@@ -18,14 +21,30 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class demoProject {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, AWTException {
 		// TODO Auto-generated method stub
 		
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
-		driver.get("https://www.nobroker.in/#signup-login");
+		driver.get("https://www.nobroker.in/");
 		driver.manage().window().maximize();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
 		
+
+//		WebElement logIn=driver.findElement(By.xpath("//*[@id=\"navHeader\"]/div[5]/div[2]/div[2]/div"));
+//	    logIn.click();
+////	    
+//	    WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+//	    WebElement number=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='tel' and @placeholder='Enter Mobile Number']")));
+//	    number.click();
+//	    number.sendKeys("9766596623");
+//	    Thread.sleep(50000);
+//
+//	    
+//	    WebElement continueButton=driver.findElement(By.xpath("//*[@id=\"signUpSubmit\"]"));
+//	    continueButton.click();
+	    
 		//cick buy on home page
 		driver.findElement(By.xpath("//div[text()='Buy']")).click();
 		
@@ -47,8 +66,8 @@ public class demoProject {
 	    suggestion.click();
 
 	    //click in dropdown of bhk
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    WebElement drop = wait.until(ExpectedConditions.elementToBeClickable(
+	    WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    WebElement drop = wait1.until(ExpectedConditions.elementToBeClickable(
 	        By.xpath("//div[contains(text(),'BHK Type')]")));
 	    drop.click();
 
@@ -69,14 +88,15 @@ public class demoProject {
 	    WebElement readyOption = driver.findElement(By.xpath("//div[text()='Ready']"));
 	    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", readyOption);
 
-	    //click on search vutton
+	    //click on search button
 	    WebElement search=driver.findElement(By.xpath("//button[normalize-space()='Search']"));
 	    search.click();
 	    Thread.sleep(2000);
 
 	    //next page
+	   
 	    
-	    //using actions for price slider
+    //using actions for price slider
 	    Actions actions = new Actions(driver);
 
         // 1. Locate the left and right slider handles
@@ -85,11 +105,12 @@ public class demoProject {
 
         // 2. Drag left handle slightly right 
         actions.clickAndHold(leftHandle).moveByOffset(130, 0).release().perform();
-        Thread.sleep(1000);
+        Thread.sleep(500);
 
         // 3. Drag right handle slightly left
         actions.clickAndHold(rightHandle).moveByOffset(-150, 0).release().perform();
         Thread.sleep(1000);
+        
         
         //scrolling down filter section using a propertystatus element
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -99,10 +120,10 @@ public class demoProject {
         
   
         JavascriptExecutor js1 = (JavascriptExecutor) driver;
-        WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait111 = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // Step 2: Click on the "Semi" checkbox in furnishing
-        WebElement semiCheckbox = wait.until(ExpectedConditions.elementToBeClickable(
+        WebElement semiCheckbox = wait111.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//div[text()='Furnishing']/following-sibling::div//span[text()='Semi']")));
         js.executeScript("arguments[0].click();", semiCheckbox);
 
@@ -115,10 +136,10 @@ public class demoProject {
         Thread.sleep(1000);
 
         // Click on "Apartment"
-        WebElement apartmentOption = wait.until(ExpectedConditions.elementToBeClickable(
+        WebElement apartmentOption = wait111.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//div[text()='Property Type']/following-sibling::div//span[text()='Apartment']")));
         js.executeScript("arguments[0].click();", apartmentOption);
-
+//
         WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(10));
   
         // Scroll to the "Parking" label text
@@ -127,19 +148,37 @@ public class demoProject {
         Thread.sleep(1000);
 
         // Locate the actual checkbox by ID
-        WebElement checkbox = wait.until(ExpectedConditions.elementToBeClickable(
+        WebElement checkbox = wait111.until(ExpectedConditions.elementToBeClickable(
                 By.id("parking_4_wheeler")));
 
-        // Click using JS in case normal click fails
+        // Click using JS 
         js.executeScript("arguments[0].click();", checkbox);
 
-        js.executeScript("window.scrollBy(0, 230;"); // Adjust scroll value if needed
-        Thread.sleep(1000);
-     
+      
+     WebElement gotItButton=driver.findElement(By.xpath("//*[@id=\"listPageTop\"]/nav/div/div[2]/div/div/div/div[3]/div/div"));
+       gotItButton.click();
+       int times = 2;
+       for (int i = 0; i < times; i++) {
+           ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
+           Thread.sleep(700); // adjust speed as needed
+       }
+       
+       WebElement ownerButton = wait.until(ExpectedConditions.elementToBeClickable(
+               By.xpath("(//button[contains(text(),'Get Owner Details')])[1]")
+           ));
 
+           // Use JavaScript to ensure it works reliably
+           js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", ownerButton);
+           js.executeScript("arguments[0].click();", ownerButton);
+           
+        
+   	    WebElement number=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='tel' and @placeholder='Enter Mobile Number']")));
+   	    number.click();
+   	    number.sendKeys("9766596623");
+   	    Thread.sleep(50000);
 
+        
 
-    
 
     
 
@@ -148,19 +187,8 @@ public class demoProject {
 	    
 	    
 		
-//		WebElement logIn=driver.findElement(By.xpath("//*[@id=\"navHeader\"]/div[5]/div[2]/div[2]/div"));
-//	    logIn.click();
-//	    
-//	    WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-//	    WebElement number=driver.findElement(By.id("signUp-phoneNumber"));
-//	    //number.click();
-//	    JavascriptExecutor js=(JavascriptExecutor) driver;
-//	    js.executeScript("arguments[0].value='9766596623';",number);
-//	    
-//	    WebElement continueButton=driver.findElement(By.id("signUp-phoneNumber"));
-//	    continueButton.click();
 	    
 
-	}
-}
+	
+}}
 
