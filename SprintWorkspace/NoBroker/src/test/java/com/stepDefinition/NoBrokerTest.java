@@ -3,7 +3,11 @@ package com.stepDefinition;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
+import com.pages.CleaningservicePage;
 import com.pages.HomePage;
+import com.pages.PaintingServicePage;
+import com.pages.SalesAgreementPage;
+import com.parameters.ExcelReader;
 import com.setup.BaseSteps;
 
 import io.cucumber.java.en.*;
@@ -11,15 +15,21 @@ import io.cucumber.java.en.*;
 public class NoBrokerTest {
 	WebDriver driver;
 	HomePage home;
+	PaintingServicePage PaintingService;
+	SalesAgreementPage SalesAgreement;
+	CleaningservicePage Cleaningservice;
 
 	// ---------------------------------Seanario 1------------------------------------------------------------
 	/*
-	 * Created by: Reviewed by: Motive: /
+	 * Created by:
+	 * Reviewed by: 
+	 * Motive: /
 	 */
-//	@Given("user is on home services page")
-//	public void user_is_on_home_services_page() {
-//		driver = BaseSteps.chromedriver();
-//	}
+	@Given("The user is on home services page")
+	public void the_user_is_on_home_services_page() {
+	   driver=BaseSteps.chromedriver();
+	}
+
 	@When("user click the search button")
 	public void user_click_the_search_button() {
 		home = new HomePage(driver);
@@ -39,7 +49,9 @@ public class NoBrokerTest {
 
 	// ------------------------------------Seanario 2----------------------------------------------------------
 	/*
-	 * Created by: Reviewed by: Motive: /
+	 * Created by: 
+	 * Reviewed by: 
+	 * Motive: /
 	 */
 
 	@Given("user is on home Services page")
@@ -61,6 +73,110 @@ public class NoBrokerTest {
 	@Then("user should see services available in that city")
 	public void user_should_see_services_available_in_that_city() {
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/home-services-in-mumbai?nbFr=Home_page"));
+	}
+
+	// ---------------------------------Seanario 3------------------------------------------------------------
+		/*
+		 * Created by:
+		 * Reviewed by: 
+		 * Motive: /
+		 */
+	@Given("the user is on the home services page")
+	public void the_user_is_on_the_home_services_page() {
+		driver = BaseSteps.chromedriver();
+	}
+	@When("the user clicks on the Painting Services option")
+	public void the_user_clicks_on_the_painting_services_option() {
+		PaintingService = new PaintingServicePage(driver);
+		PaintingService.ClickPaintingService();
+	}
+	@When("the user clicks on the painting services list")
+	public void the_user_clicks_on_the_painting_services_list() {
+		PaintingService.SeeAllService();
+	}
+	@When("the user requests an estimate for the selected painting service")
+	public void the_user_requests_an_estimate_for_the_selected_painting_service() {
+		PaintingService.GetEstimate();
+	}
+	@When("user logged in")
+	public void user_logged_in() {
+		PaintingService.userlogin();
+	}
+	@Then("the user should be navigated to the confirm loaction page")
+	public void the_user_should_be_navigated_to_the_confirm_loaction_page() {
+		Assert.assertTrue(driver.getTitle().equals("Get Expert Professional Home Services Upto 50% OFF - NoBroker"));
+	}
+
+	// ---------------------------------Seanario 4------------------------------------------------------------
+			/*
+			 * Created by:
+			 * Reviewed by: 
+			 * Motive: /
+			 */
+	@Given("User is on services page")
+	public void user_is_on_services_page() {
+		driver = BaseSteps.chromedriver();
+	}
+	@When("the user clicks sales agreement option")
+	public void the_user_clicks_sales_agreement_option() {
+		SalesAgreement = new SalesAgreementPage(driver);
+		SalesAgreement.clickSalesAgreement();
+	}
+	@When("the user clicks menu and selects corporate enquiry")
+	public void the_user_clicks_menu_and_selects_corporate_enquiry() {
+		SalesAgreement.clickMenuAndselectCorporatEnquiry();
+	}
+	@When("the user clicks know more button")
+	public void the_user_clicks_know_more_button() {
+		SalesAgreement.clickKnowMore();
+	}
+	@When("the user fills the form with {string}")
+	public void the_user_fills_the_form_with(String rowIndexStr) {
+	    int rowIndex=Integer.parseInt(rowIndexStr);
+	    String name=ExcelReader.getCred("Sheet1", rowIndex, 0);
+	    String company=ExcelReader.getCred("Sheet1", rowIndex, 1);
+	    String email=ExcelReader.getCred("Sheet1", rowIndex, 2);
+	    String phone=ExcelReader.getCred("Sheet1", rowIndex, 3);
+	    String city=ExcelReader.getCred("Sheet1", rowIndex, 4);
+	    String  employees=ExcelReader.getCred("Sheet1", rowIndex, 5);
+	    
+		SalesAgreement.fillForm(name,company,email, phone, city, employees);
+	}
+	@When("user submit the form")
+	public void user_submit_the_form() throws InterruptedException {
+		SalesAgreement.clickConnect();
+	}
+	@Then("Form should be submittted successfully")
+	public void form_should_be_submittted_successfully() {
+	    
+	}
+	
+	// ---------------------------------Seanario 5------------------------------------------------------------
+				/*
+				 * Created by:
+				 * Reviewed by: 
+				 * Motive: /
+				 */
+	@When("the user clicks on the Book option")
+	public void the_user_clicks_on_the_book_option() {
+		Cleaningservice=new CleaningservicePage(driver);
+		Cleaningservice.clickBook();
+	}
+	@When("the user adds the cleaning service to the cart")
+	public void the_user_adds_the_cleaning_service_to_the_cart() {
+		Cleaningservice.addToCart();;
+	}
+	@When("the user logged in")
+	public void the_user_logged_in() {
+		Cleaningservice.userLogin();
+	}
+	@When("the user proceeds to checkout")
+	public void the_user_proceeds_to_checkout() {
+		Cleaningservice.clickProceed();
+	}
+	@Then("it should be navigated to schedule to your service page")
+	public void it_should_be_navigated_to_schedule_to_your_service_page() {
+		Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/cleaning-services-in-chennai/slots?nbFr=MENU_VIDEO-services-in-chennai%3FfromHomePage&initiator=ServiceGrid&nbFr=HS-HOME-PAGE"));
 	}
 
 }

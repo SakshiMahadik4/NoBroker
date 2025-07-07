@@ -42,10 +42,12 @@ public class HomePage extends BasePage {
 
 	public void enterData() {
 	Actions action = new Actions(driver);
-    action.sendKeys(searchBox,"AC Services").build().perform();
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(8));
-    wait.until(ExpectedConditions.visibilityOf(img)); 
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    wait.until(ExpectedConditions.visibilityOf(searchBox));
+    action.sendKeys(searchBox, "AC Services").build().perform();
+    wait.until(ExpectedConditions.visibilityOf(img));
     action.click(img).build().perform();
+
 	}
  
      public void clickCity() {
