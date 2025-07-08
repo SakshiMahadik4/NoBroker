@@ -2,6 +2,7 @@ package com.demo;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
@@ -153,31 +154,26 @@ public class demoProject {
 
         // Click using JS 
         js.executeScript("arguments[0].click();", checkbox);
-
+        
+        WebElement shortlist =driver.findElement(By.id("shortlistProperty"));
       
-     WebElement gotItButton=driver.findElement(By.xpath("//*[@id=\"listPageTop\"]/nav/div/div[2]/div/div/div/div[3]/div/div"));
-       gotItButton.click();
-       int times = 2;
-       for (int i = 0; i < times; i++) {
-           ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
-           Thread.sleep(700); // adjust speed as needed
-       }
-       
-       WebElement ownerButton = wait.until(ExpectedConditions.elementToBeClickable(
-               By.xpath("(//button[contains(text(),'Get Owner Details')])[1]")
-           ));
-
-           // Use JavaScript to ensure it works reliably
-           js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", ownerButton);
-           js.executeScript("arguments[0].click();", ownerButton);
-           
-        
-   	    WebElement number=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='tel' and @placeholder='Enter Mobile Number']")));
-   	    number.click();
-   	    number.sendKeys("9766596623");
-   	    Thread.sleep(50000);
-
-        
+//     WebElement gotItButton=driver.findElement(By.xpath("//*[@id=\"listPageTop\"]/nav/div/div[2]/div/div/div/div[3]/div/div"));
+//       gotItButton.click();
+//       int times = 2;
+//       for (int i = 0; i < times; i++) {
+//           ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 300);");
+//           Thread.sleep(700); // adjust speed as needed
+//       }
+//       
+//       WebElement ownerButton = wait.until(ExpectedConditions.elementToBeClickable(
+//               By.xpath("(//button[contains(text(),'Get Owner Details')])[1]")
+//           ));
+//
+//           // Use JavaScript to ensure it works reliably
+//           js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", ownerButton);
+//           js.executeScript("arguments[0].click();", ownerButton);
+//           
+               
 
 
     

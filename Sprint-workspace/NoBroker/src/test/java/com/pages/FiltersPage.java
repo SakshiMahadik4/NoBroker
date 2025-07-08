@@ -1,33 +1,19 @@
 package com.pages;
 
-import java.time.Duration;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.util.List;
-import java.util.Properties;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FiltersPage extends ContactOwnerPage {
-	 public FiltersPage(WebDriver driver) {
-			super(driver);
-			PageFactory.initElements(driver, this);
-			// TODO Auto-generated constructor stub
-		}
-	
-	WebDriver driver;
-    WebDriverWait wait;
-    JavascriptExecutor js;
-    Actions actions;
-    Properties prop;
-    
+public class FiltersPage extends PropertyListingPage {
+
     @FindBy(xpath = "//div[contains(@class,'rc-slider-handle')][1]")
     public WebElement priceLeftSlider;
 
@@ -36,7 +22,7 @@ public class FiltersPage extends ContactOwnerPage {
 
     @FindBy(xpath = "//div[text()='Furnishing']/following-sibling::div//span[text()='Semi']")
     public WebElement semiFurnishingCheckbox;
-    
+
     @FindBy(xpath = "//div[contains(text(),'Property Status')]")
     public WebElement propertyStatusDropdown;
 
@@ -51,20 +37,16 @@ public class FiltersPage extends ContactOwnerPage {
 
     @FindBy(id = "parking_4_wheeler")
     public WebElement parkingCheckbox;
+ 
+    public FiltersPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+    }
 
-    
-   
-
-  
-    public void loadUrl()
-	{
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public void loadUrl() {
         driver.get(prop.getProperty("filterUrl"));
-	}
-    
+    }
+
     public void applyPriceFilter() {
         try {
             wait.until(ExpectedConditions.visibilityOf(priceLeftSlider));
@@ -74,11 +56,13 @@ public class FiltersPage extends ContactOwnerPage {
             e.printStackTrace();
         }
     }
+
     public void applyFurnishingFilter() {
         js.executeScript("arguments[0].scrollIntoView(true);", propertyStatusDropdown);
         js.executeScript("arguments[0].click();", semiFurnishingCheckbox);
     }
-	public void applyPropertyTypeFilter() {
+
+    public void applyPropertyTypeFilter() {
         try {
             js.executeScript("arguments[0].scrollIntoView(true);", propertyTypeHeading);
             wait.until(ExpectedConditions.elementToBeClickable(apartmentPropertyType));
@@ -97,12 +81,12 @@ public class FiltersPage extends ContactOwnerPage {
             e.printStackTrace();
         }
     }
-    
+
     public boolean isFilteredListingVisible() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".card"))); 
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".card")));
             List<WebElement> listings = driver.findElements(By.cssSelector(".card"));
-            return listings.size() > 0 && listings.get(0).isDisplayed();
+            return !listings.isEmpty() && listings.get(0).isDisplayed();
         } catch (Exception e) {
             e.printStackTrace();
             return false;

@@ -23,20 +23,19 @@ Feature: Property Search and Interaction on Buy Page
   Scenario: Verify user can contact owner using Get Owner Details button
     Given the user is logged in and viewing a property listing
     When the user clicks the Get Owner Details button
-    And the login Page will be display enter details
     Then the owners contact information should be displayed
 
 @wishlist
   Scenario: Verify user can wishlist a property
-    Given the user is logged in and viewing a property listing
-    When the user clicks the "Wishlist" button
-    And the user opens the wishlist pagd
-    Then the property should be listed in the user's wishlist
+    Given the user is logged in and viewing a property listing page
+    When the user clicks the Wishlist button
+    And the user opens the wishlist page
+    Then the property should be listed in the users wishlist
 
 @schedule 
   Scenario: Verify user can schedule visit for a property
-    Given the user is logged in and viewing a property listing
-    When the user clicks "Schedule Visit"
+    Given the user is logged in and viewing a property listing 
+    When the user clicks Schedule Visit
     And selects a date from the calendar
     Then the visit should be scheduled and confirmation should be shown
 

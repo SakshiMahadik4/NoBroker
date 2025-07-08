@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src\\test\\resource\\Features\\Buy.feature",
 glue="com.stepDefinition",
-tags="@filters")
+tags="@wishlist")
 public class TestRunnerjnuit {
 
 }
