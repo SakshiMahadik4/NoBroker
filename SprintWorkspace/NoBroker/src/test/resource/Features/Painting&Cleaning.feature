@@ -46,4 +46,14 @@ Feature: Verification of Painting & Cleaning module
     And the user proceeds to checkout
     Then it should be navigated to schedule to your service page
  
-
+@PostYourProperty
+  Scenario: Validate the post property form with invalid data
+    Given the user is on the home services page
+    When the user clicks Rental Agreement option
+    And the user clicks menu and selects post your property
+    And the user fills form
+    |Property.xlsx|
+    And the user clicks on start posting
+    Then it should be displayed error message
+    
+   

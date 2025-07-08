@@ -16,7 +16,11 @@ public class BaseSteps {
 
     public static WebDriver chromedriver() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        coptions = new ChromeOptions();
+		coptions.addArguments("disable-notification");
+		coptions.addArguments("disable-popup-blocking");
+		driver = new ChromeDriver(coptions);
+     
         driver.get("https://www.nobroker.in/home-services-in-chennai?nbFr=Home_page");
         driver.manage().window().maximize();
         System.out.println("ChromeDriver initialized and navigated to the website");

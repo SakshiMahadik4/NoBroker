@@ -1,8 +1,14 @@
 package com.pages;
 
+import java.io.File;
+
+import java.io.IOException;
 import java.time.Duration;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -59,4 +65,19 @@ public class HomePage extends BasePage {
     	 waitUntilWebElementIsClickable(imgcity);
     	 imgcity.click();
      }
+     
+     public void takesScreen() throws IOException
+		{
+			TakesScreenshot screen1=(TakesScreenshot)driver;
+			File src1= screen1.getScreenshotAs(OutputType.FILE);
+			String filename = "View_Report"+System.currentTimeMillis()+".png";
+			String destination ="C:\\Windows\\System32\\config\\systemprofile\\SprintWorkspace\\NoBroker\\src\\test\\resource\\Screenshot\\"
+			+filename;
+			
+			File dest = new File(destination);
+		   FileUtils.copyFile(src1, dest);
+		   
+		
+					
+		}
 }

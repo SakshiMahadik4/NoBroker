@@ -53,8 +53,6 @@ public class SalesAgreementPage extends BasePage {
 	 @FindBy(xpath="//button[contains(text(),'Connect with us')]")
 	    WebElement ConnectButton;
 	 
-	//button[contains(text(),'Connect with us')]
-	 
 	public SalesAgreementPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -70,8 +68,9 @@ public class SalesAgreementPage extends BasePage {
 	     action.moveToElement(SalesAgreementButton).click().build().perform();
 	}
 	
-	public void clickMenuAndselectCorporatEnquiry() {
-		 waitUntilWebElementIsClickable(Menu);
+	public void clickMenuAndselectCorporatEnquiry() throws InterruptedException {
+		 //waitUntilWebElementIsClickable(Menu);
+		Thread.sleep(3000);
 		 Menu.click();
 		 
 		 Robot robot;
@@ -88,7 +87,6 @@ public class SalesAgreementPage extends BasePage {
 			action.moveToElement(CorpEnquiry).click().build().perform();
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -100,7 +98,6 @@ public class SalesAgreementPage extends BasePage {
 		 try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -108,34 +105,23 @@ public class SalesAgreementPage extends BasePage {
 	public void fillForm(String name,String company,String email,String phone,String city,String employees) {
 		waitUntilWebElementIsVisible(nameField);
 		nameField.sendKeys(name);
-		
 		companyField.sendKeys(company);
-		
-		emailField.sendKeys(email);
-		
+		emailField.sendKeys(email);	
 		phoneField.sendKeys(phone);
-		
 		waitUntilWebElementIsClickable(cityField);
 			Select select=new Select(cityField);
 			select.selectByVisibleText(city); 
-		
 		NumOfEmpField.sendKeys(employees);	
 	}
 	
 
      public void clickConnect() throws InterruptedException {
-//     waitUntilWebElementIsClickable(ConnectButton);
-//     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ConnectButton);
-//     Thread.sleep(500);
-//     ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ConnectButton);
-    // ConnectButton.click();
     	 try {
 			Robot robot=new Robot();
 			robot.mouseMove(630,610);
 			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 			robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);		}
-    	 catch (AWTException e) {
-			// TODO Auto-generated catch block
+    	 catch (Exception e) {
 			e.printStackTrace();
 		}
  }

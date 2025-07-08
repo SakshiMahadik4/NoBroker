@@ -57,7 +57,7 @@ public class PaintingServicePage extends BasePage {
     public void userlogin() {
         waitUntilWebElementIsClickable(PhoneNumber);
         PhoneNumber.click();
-        PhoneNumber.sendKeys("9067958631");
+        PhoneNumber.sendKeys(prop.getProperty("phoneNumber"));
         try {
             Thread.sleep(15000);
         } catch (InterruptedException e) {
@@ -65,6 +65,6 @@ public class PaintingServicePage extends BasePage {
         }
         action.moveToElement(GetEstimate).click().build().perform();
     }
-
-   
+    
+    
 }

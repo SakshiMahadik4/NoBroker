@@ -44,7 +44,7 @@ public class CleaningservicePage extends BasePage {
     }
 
     public void clickBook() {
-        wait.until(ExpectedConditions.elementToBeClickable(homeCleaning));
+        waitUntilWebElementIsClickable(homeCleaning);
         homeCleaning.click();
     }
 
@@ -75,7 +75,7 @@ public class CleaningservicePage extends BasePage {
                 Thread.sleep(200);
             }
 
-            wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+            waitUntilWebElementIsClickable(addToCartButton);
             addToCartButton.click();
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,9 +83,9 @@ public class CleaningservicePage extends BasePage {
     }
 
     public void userLogin() {
-        wait.until(ExpectedConditions.elementToBeClickable(PhoneNumber));
+    	waitUntilWebElementIsClickable(PhoneNumber);
         PhoneNumber.click();
-        PhoneNumber.sendKeys("9067958631");
+        PhoneNumber.sendKeys(prop.getProperty("phoneNumber"));
         try {
             Thread.sleep(15000);
         } catch (InterruptedException e) {
@@ -94,7 +94,7 @@ public class CleaningservicePage extends BasePage {
     }
 
     public void clickProceed() {
-        wait.until(ExpectedConditions.elementToBeClickable(proceedbutton));
+    	waitUntilWebElementIsClickable(proceedbutton);
         proceedbutton.click();
     }
     

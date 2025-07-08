@@ -1,11 +1,15 @@
 package com.stepDefinition;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import com.pages.CleaningservicePage;
 import com.pages.HomePage;
 import com.pages.PaintingServicePage;
+import com.pages.PostPropertyPage;
 import com.pages.SalesAgreementPage;
 import com.parameters.ExcelReader;
 import com.setup.BaseSteps;
@@ -18,6 +22,8 @@ public class NoBrokerTest {
 	PaintingServicePage PaintingService;
 	SalesAgreementPage SalesAgreement;
 	CleaningservicePage Cleaningservice;
+	PostPropertyPage PostProperty;
+	ExcelReader excel;
 
 	// ---------------------------------Seanario 1------------------------------------------------------------
 	/*
@@ -39,12 +45,13 @@ public class NoBrokerTest {
 	@When("user enter data in the search bar")
 	public void user_enter_data_in_the_search_bar() {
 		home.enterData();
-
+		
 	}
 
 	@Then("user should see relevant services for my data")
-	public void user_should_see_relevant_services_for_my_data() {
+	public void user_should_see_relevant_services_for_my_data() throws IOException {
 		Assert.assertTrue(driver.getTitle().equals("Get Expert Professional Home Services Upto 50% OFF - NoBroker"));
+		home.takesScreen();
 	}
 
 	// ------------------------------------Seanario 2----------------------------------------------------------
@@ -71,8 +78,9 @@ public class NoBrokerTest {
 	}
 
 	@Then("user should see services available in that city")
-	public void user_should_see_services_available_in_that_city() {
+	public void user_should_see_services_available_in_that_city() throws IOException {
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/home-services-in-mumbai?nbFr=Home_page"));
+	    home.takesScreen();
 	}
 
 	// ---------------------------------Seanario 3------------------------------------------------------------
@@ -123,7 +131,7 @@ public class NoBrokerTest {
 		SalesAgreement.clickSalesAgreement();
 	}
 	@When("the user clicks menu and selects corporate enquiry")
-	public void the_user_clicks_menu_and_selects_corporate_enquiry() {
+	public void the_user_clicks_menu_and_selects_corporate_enquiry() throws InterruptedException {
 		SalesAgreement.clickMenuAndselectCorporatEnquiry();
 	}
 	@When("the user clicks know more button")
@@ -148,7 +156,8 @@ public class NoBrokerTest {
 	}
 	@Then("Form should be submittted successfully")
 	public void form_should_be_submittted_successfully() {
-	    
+	   Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/prophub/corporate-partnership/comprehensive-corporate-solutions/?isHybrid=false"));
+		//Assert.assertEquals(driver.getCurrentUrl(), driver.getCurrentUrl().contains("https://www.nobroker.in/prophub"));
 	}
 	
 	// ---------------------------------Seanario 5------------------------------------------------------------
@@ -177,6 +186,40 @@ public class NoBrokerTest {
 	@Then("it should be navigated to schedule to your service page")
 	public void it_should_be_navigated_to_schedule_to_your_service_page() {
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/cleaning-services-in-chennai/slots?nbFr=MENU_VIDEO-services-in-chennai%3FfromHomePage&initiator=ServiceGrid&nbFr=HS-HOME-PAGE"));
+	}
+
+	
+	// ---------------------------------Seanario 6------------------------------------------------------------
+	/*
+	 * Created by:
+	 * Reviewed by: 
+	 * Motive: /
+	 */
+	
+	@When("the user clicks Rental Agreement option")
+	public void the_user_clicks_rental_agreement_option() {
+		PostProperty=new PostPropertyPage(driver);
+		PostProperty.clickRentalAgreement();
+	}
+	@When("the user clicks menu and selects post your property")
+	public void the_user_clicks_menu_and_selects_post_your_property() {
+		PostProperty.clickMenuAndselectpostproperty();
+	}
+	@When("the user fills form")
+	public void the_user_fills_form(io.cucumber.datatable.DataTable dataTable) throws IOException {
+		excel=new ExcelReader();
+		List<String> list=dataTable.asList(String.class);
+		String cred[]=excel.propertyFormReader(list.get(0));
+		PostProperty.propertyFormData(cred[0], cred[1]);
+	}
+	@When("the user clicks on start posting")
+	public void the_user_clicks_on_start_posting() {
+	   PostProperty.startPosting();
+	}
+	
+	@Then("it should be displayed error message")
+	public void it_should_be_displayed_error_message() {
+		Assert.assertTrue(PostProperty.diplayError());
 	}
 
 }
