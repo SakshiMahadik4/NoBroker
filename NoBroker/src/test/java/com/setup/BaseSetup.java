@@ -6,15 +6,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import com.parameters.PropertyReader;
 
 public class BaseSetup{
 
     private static WebDriver driver;
-
-    // This method ensures that only one driver instance is created
-    @SuppressWarnings("static-access")
 	public static WebDriver initializeDriver(String browser) {
         if (driver != null) {
             return driver;  // Return the existing driver if already initialized
@@ -57,6 +57,7 @@ public class BaseSetup{
     public static WebDriver getDriver() {
         return driver;
     }
+    
 
     // Quits the driver
     public static void quitDriver() {

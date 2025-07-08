@@ -7,10 +7,9 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features="src\\test\\resource\\com.features\\Rent.feature",
-glue={"com.stepdefinition"} , tags= "@loan")
+glue={"com.stepdefinition"} , tags= "@NoBroker", plugin = {"pretty"})
 
 public class TestRunner {
-	
 	
 
 }

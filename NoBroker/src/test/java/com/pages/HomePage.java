@@ -67,12 +67,16 @@ public class HomePage extends BasePage {
 		 locationDropdown.click(); 
 		 locationValue.click(); // Click on the location value in the dropdown
 	 }
-	 public void selectLocality() { 
+	 public void selectLocality(String city) { 
 		 waitUntilWebElementIsVisible(SearchLocality);  // Wait for the search locality input to be visible
-		 SearchLocality.sendKeys("Hinjawadi");
+		 SearchLocality.sendKeys(city);
 		 waitUntilWebElementIsVisible(hinjawadiLocation);  
 		 hinjawadiLocation.click();// Click on the Hinjawadi location
 	 }
+	 
+	 
+	 
+	 // Method to apply availability filter
 	 public void applyAvailabilityFilter() {
 		 waitUntilWebElementIsVisible(bhkDropdown);
 		 bhkDropdown.click();
@@ -88,17 +92,19 @@ public class HomePage extends BasePage {
 		 waitUntilWebElementIsVisible(searchButton);  // Wait for the search button to be visible
 		 searchButton.click();  
 	 }
-	 public void premiumFilter() {
+	 public void premiumFilter() {	
 		 waitUntilWebElementIsVisible(PremiumFilter);  // Wait for the Premium Filter tab to be visible
 		 PremiumFilter.click();  // Click on the Premium Filter tab
 		 Assert.assertTrue("Premium Filter is not displayed", PremiumFilter.isDisplayed());  // Verify if the Premium Filter is displayed
 	 }
 	 
-	 public void errorMessage() {
+	 public void errorMessage() throws InterruptedException {
 		 // This method is to handle the error message when the locality field is empty
-		 	waitUntilWebElementIsVisible(alertMessageBox);  // Wait for the alert message box to be visible
+		 	waitUntilWebElementIsVisible(alertMessageBox);
+		 	Thread.sleep(1500);// Wait for the alert message box to be visible
 			String errorMessage = alertMessageBox.getText().trim(); 
-			String expectedMessage = "PLEASE SELECT A LOCALITY WITHIN BANGALORE";
-			Assert.assertEquals("PLEASE SELECT A LOCALITY WITHIN BANGALORE", errorMessage , expectedMessage);
+			System.out.println(errorMessage);
+			String expectedMessage = "PLEASE SELECT A LOCALITY WITHIN PUNE";
+			Assert.assertEquals("PLEASE SELECT A LOCALITY WITHIN PUNE", errorMessage , expectedMessage);
 	 }
 }

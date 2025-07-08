@@ -83,8 +83,9 @@ public class PropertyPage extends BasePage{
 		}
 		public void errorMessage() {
 			waitUntilWebElementIsVisible(noResultsMessage);  // Wait for the no results message to be visible
-			String errorText = noResultsMessage.getText();  // Get the text of the no results message
-			System.out.println("Error Message: " + errorText);  // Print the error message to the console
+			String errorText = noResultsMessage.getText(); 
+			String expectedMessage = "Didn't find what you are looking for?";
+			Assert.assertEquals("Didn't find what you are looking for?", errorText , expectedMessage);
 		}
 
 }
