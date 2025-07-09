@@ -74,14 +74,11 @@ public class PostPropertyPage extends BasePage {
 	 
 	 public void startPosting() {
 		 try {
-	        	//Robot robot=new Robot();
 	        	 Thread.sleep(1000);
 	        	 JavascriptExecutor js=(JavascriptExecutor)driver;
-	     		//js.executeScript("location.reload()");
 	     		js.executeScript("window.scrollBy(0,500)");
 	            waitUntilWebElementIsClickable(startPostButton);
-	            startPostButton.click();
-	            
+	            startPostButton.click(); 
 	            Thread.sleep(1000);
 	            js.executeScript("window.scrollBy(0,-500)");
 	            

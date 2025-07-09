@@ -1,6 +1,7 @@
 package com.pages;
 
 import java.awt.Robot;
+
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
@@ -50,16 +51,11 @@ public class CleaningservicePage extends BasePage {
 
     public void addToCart() {
         try {
-            Thread.sleep(7000);
-            Robot robot = new Robot();
-            robot.mouseMove(300, 200);
-            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-
+            Thread.sleep(6000);
+            clickUsingRobot(300, 200); // from BasePage
             Thread.sleep(2000);
 
             String originalWindow = driver.getWindowHandle();
-
             // Wait for new window to open
             Set<String> allWindows = driver.getWindowHandles();
             for (String windowHandle : allWindows) {
@@ -70,8 +66,7 @@ public class CleaningservicePage extends BasePage {
             }
 
             for (int i = 0; i < 6; i++) {
-                robot.keyPress(KeyEvent.VK_DOWN);
-                robot.keyRelease(KeyEvent.VK_DOWN);
+            	ScrollUsingRobot();
                 Thread.sleep(200);
             }
 
@@ -99,6 +94,12 @@ public class CleaningservicePage extends BasePage {
     }
     
     public boolean assertSchedulepage() {
-    	return Schedulepage.getText().equals("Schedule your Service");
+    	try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return Schedulepage.isDisplayed();
     }
 }

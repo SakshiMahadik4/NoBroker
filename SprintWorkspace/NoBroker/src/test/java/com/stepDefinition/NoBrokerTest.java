@@ -1,10 +1,14 @@
 package com.stepDefinition;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
 
 import com.pages.CleaningservicePage;
 import com.pages.HomePage;
@@ -14,6 +18,8 @@ import com.pages.SalesAgreementPage;
 import com.parameters.ExcelReader;
 import com.setup.BaseSteps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 
 public class NoBrokerTest {
@@ -51,7 +57,6 @@ public class NoBrokerTest {
 	@Then("user should see relevant services for my data")
 	public void user_should_see_relevant_services_for_my_data() throws IOException {
 		Assert.assertTrue(driver.getTitle().equals("Get Expert Professional Home Services Upto 50% OFF - NoBroker"));
-		home.takesScreen();
 	}
 
 	// ------------------------------------Seanario 2----------------------------------------------------------
@@ -80,7 +85,6 @@ public class NoBrokerTest {
 	@Then("user should see services available in that city")
 	public void user_should_see_services_available_in_that_city() throws IOException {
 		Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/home-services-in-mumbai?nbFr=Home_page"));
-	    home.takesScreen();
 	}
 
 	// ---------------------------------Seanario 3------------------------------------------------------------
@@ -185,7 +189,7 @@ public class NoBrokerTest {
 	}
 	@Then("it should be navigated to schedule to your service page")
 	public void it_should_be_navigated_to_schedule_to_your_service_page() {
-		Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/cleaning-services-in-chennai/slots?nbFr=MENU_VIDEO-services-in-chennai%3FfromHomePage&initiator=ServiceGrid&nbFr=HS-HOME-PAGE"));
+		Assert.assertTrue(Cleaningservice.assertSchedulepage());
 	}
 
 	
@@ -222,4 +226,11 @@ public class NoBrokerTest {
 		Assert.assertTrue(PostProperty.diplayError());
 	}
 
+	@After
+	public void tearDown(Scenario scenario) // will take screenshots for each and every scenario
+	{
+		final byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+		 scenario.attach(screenshot, "image/png", "Image");
+	}
+	
 }

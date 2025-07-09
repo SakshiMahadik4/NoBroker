@@ -1,5 +1,8 @@
 package com.pages;
 
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.time.Duration;
 import java.util.Properties;
@@ -41,6 +44,20 @@ public class BasePage {
             e.printStackTrace();
         }
     }
+	
+	public void clickUsingRobot(int x, int y) throws Exception {
+		Robot robot = new Robot();
+		robot.mouseMove(x, y);
+		Thread.sleep(1000);
+		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+	}
+	
+	public void ScrollUsingRobot() throws Exception {
+		Robot robot = new Robot();
+		 robot.keyPress(KeyEvent.VK_DOWN);
+         robot.keyRelease(KeyEvent.VK_DOWN);
+	}
 	 
 
 }

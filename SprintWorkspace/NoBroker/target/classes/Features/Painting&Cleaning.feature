@@ -1,3 +1,4 @@
+@NoBroker
 Feature: Verification of Painting & Cleaning module
 
 @search
@@ -24,7 +25,7 @@ Feature: Verification of Painting & Cleaning module
     Then the user should be navigated to the confirm loaction page
 
  @CorporateEnquiry
- Scenario Outline: 
+ Scenario Outline: Validate the corporate form
     Given User is on services page
     When the user clicks sales agreement option
     And the user clicks menu and selects corporate enquiry
@@ -37,14 +38,6 @@ Feature: Verification of Painting & Cleaning module
     | RowIndex|
     |1        |
   
- @Cleaningservice
-  Scenario: Validate the cleaning services checkout process
-    Given the user is on the home services page
-    When the user clicks on the Book option
-    And the user adds the cleaning service to the cart
-    And the user logged in 
-    And the user proceeds to checkout
-    Then it should be navigated to schedule to your service page
  
 @PostYourProperty
   Scenario: Validate the post property form with invalid data
@@ -55,5 +48,15 @@ Feature: Verification of Painting & Cleaning module
     |Property.xlsx|
     And the user clicks on start posting
     Then it should be displayed error message
+    
+ @Cleaningservice
+  Scenario: Validate the cleaning services checkout process
+    Given the user is on the home services page
+    When the user clicks on the Book option
+    And the user adds the cleaning service to the cart
+    And the user logged in 
+    And the user proceeds to checkout
+    Then it should be navigated to schedule to your service page
+ 
     
    

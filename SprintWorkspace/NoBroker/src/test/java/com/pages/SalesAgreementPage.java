@@ -68,18 +68,13 @@ public class SalesAgreementPage extends BasePage {
 	     action.moveToElement(SalesAgreementButton).click().build().perform();
 	}
 	
-	public void clickMenuAndselectCorporatEnquiry() throws InterruptedException {
-		 //waitUntilWebElementIsClickable(Menu);
-		Thread.sleep(3000);
-		 Menu.click();
-		 
-		 Robot robot;
+	public void clickMenuAndselectCorporatEnquiry()  {
 		try {
-			robot = new Robot();
+			Thread.sleep(3000);
+			 Menu.click();
 			for(int i=0;i<6;i++)
 			 {
-				 robot.keyPress(KeyEvent.VK_DOWN);
-				 robot.keyRelease(KeyEvent.VK_DOWN);
+				ScrollUsingRobot();
 				 Thread.sleep(200);
 			 }
 			
@@ -117,10 +112,8 @@ public class SalesAgreementPage extends BasePage {
 
      public void clickConnect() throws InterruptedException {
     	 try {
-			Robot robot=new Robot();
-			robot.mouseMove(630,610);
-			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-			robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);		}
+    		 clickUsingRobot(630, 610);
+    		 }
     	 catch (Exception e) {
 			e.printStackTrace();
 		}

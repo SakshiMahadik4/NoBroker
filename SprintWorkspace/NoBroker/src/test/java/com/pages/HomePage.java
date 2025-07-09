@@ -66,18 +66,5 @@ public class HomePage extends BasePage {
     	 imgcity.click();
      }
      
-     public void takesScreen() throws IOException
-		{
-			TakesScreenshot screen1=(TakesScreenshot)driver;
-			File src1= screen1.getScreenshotAs(OutputType.FILE);
-			String filename = "View_Report"+System.currentTimeMillis()+".png";
-			String destination ="C:\\Windows\\System32\\config\\systemprofile\\SprintWorkspace\\NoBroker\\src\\test\\resource\\Screenshot\\"
-			+filename;
-			
-			File dest = new File(destination);
-		   FileUtils.copyFile(src1, dest);
-		   
-		
-					
-		}
+     
 }
