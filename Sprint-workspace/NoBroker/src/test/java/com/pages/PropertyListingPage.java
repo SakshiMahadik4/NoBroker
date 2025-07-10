@@ -17,16 +17,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-public class PropertyListingPage {
-	WebDriver driver;
-    WebDriverWait wait;
-    JavascriptExecutor js;
-    Actions actions;
-    Properties prop;
-    
-    @FindBy(xpath = "//*[@id=\\\"listPageTop\\\"]/nav/div/div[2]/div/div/div/div[3]/div/div")
-    public WebElement gotItButton;
+public class PropertyListingPage extends BasePage{
     
     @FindBy(xpath="//div[contains(text(),'Log in')]")
     public WebElement logIn;
@@ -46,37 +39,21 @@ public class PropertyListingPage {
     @FindBy(id = "shortlistProperty")
     public List<WebElement> shortlistButton;
     
+    @FindBy(xpath = "//*[contains(text(),'added to your wishlist')]")
+    public WebElement visibleWishlist;
+    
     public PropertyListingPage(WebDriver driver) {
-        this.driver = driver;
-		PageFactory.initElements(driver, this);
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		this.js = (JavascriptExecutor) driver;      
-		this.actions = new Actions(driver);
-		loadProperties();
+    	super(driver);
+        PageFactory.initElements(driver, this);
     }
-    
-    
+     
     public void contactLoadUrl() {
-        driver.get(prop.getProperty("contactUrl"));
+        driver.get(properties.getProperty("contactUrl"));
     }
     
-    public void loadProperties() {
-        try {
-            prop = new Properties();
-            FileInputStream fis = new FileInputStream("C:\\Windows\\System32\\config\\systemprofile\\Sprint-workspace\\NoBroker\\src\\test\\resource\\Properties\\Buy.properties");
-            prop.load(fis);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    } 
-    
-//    public void handlePopup() {
-//         gotItButton.click();
-//       
-//    }
     
     public void scrollToListings() {
-    	js.executeScript("window.scrollBy(0,450)");
+    	js.executeScript("window.scrollBy(0,1300)");
     }
     
     
@@ -95,11 +72,11 @@ public class PropertyListingPage {
 			e1.printStackTrace();
 		}
 
-    	//wait.until(ExpectedConditions.visibilityOf(numberInput));
-    	numberInput.sendKeys("9766596623");
-    	//numberInput.sendKeys(prop.getProperty("mobileno"));
+    	wait.until(ExpectedConditions.visibilityOf(numberInput));
+    	//numberInput.sendKeys("9766596623");
+    	numberInput.sendKeys(properties.getProperty("mobileno"));
     	try {
-			Thread.sleep(60000);
+			Thread.sleep(50000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,23 +84,18 @@ public class PropertyListingPage {
     	continueButton.click();
     }
 
-    public boolean isLoginFieldDisplayed() {
-        try {
-            return numberInput.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+    public void ownerDetailsSent() {   
+    	System.out.println("Details sent");		
     }
-    
-	  public void handlePopup() {
-		  gotItButton.click();
-	
-	}
-    
-
-    public void wishlistButton(int index)  {
+  
+    public void wishlistButton()  {
     	Robot robot;
 		try {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			robot = new Robot();
 			try {
 				Thread.sleep(2000);
@@ -144,23 +116,15 @@ public class PropertyListingPage {
     
     public void wishlistBag() {
     	try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	wishlistBag.click();
     }
     
-    public boolean isWishlistConfirmed() {
-        try {
-            WebElement toast = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[contains(text(),'added to your wishlist')]")
-            ));
-            return toast.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+    public void isWishlistConfirmed() {
+    	Assert.assertTrue(driver.getCurrentUrl().equals("https://www.nobroker.in/profile/shortlist?tab=all&nbFr=my_shortlist_header"));
     }
 
 

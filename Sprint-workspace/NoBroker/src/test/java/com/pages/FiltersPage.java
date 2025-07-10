@@ -1,6 +1,5 @@
 package com.pages;
 
-import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.util.List;
@@ -11,8 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
-public class FiltersPage extends PropertyListingPage {
+public class FiltersPage extends BasePage {
 
     @FindBy(xpath = "//div[contains(@class,'rc-slider-handle')][1]")
     public WebElement priceLeftSlider;
@@ -37,24 +37,24 @@ public class FiltersPage extends PropertyListingPage {
 
     @FindBy(id = "parking_4_wheeler")
     public WebElement parkingCheckbox;
+    
+    @FindBy(xpath = "//button[@class='w-full btn btn-primary btn-md']")
+    public List<WebElement> getOwnerDetails;
  
     public FiltersPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        loadProperties();
     }
 
     public void loadUrl() {
-        driver.get(prop.getProperty("filterUrl"));
+        driver.get(properties.getProperty("filterUrl"));
     }
 
     public void applyPriceFilter() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(priceLeftSlider));
-            actions.clickAndHold(priceLeftSlider).moveByOffset(130, 0).release().perform();
-            actions.clickAndHold(priceRightSlider).moveByOffset(-150, 0).release().perform();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+         wait.until(ExpectedConditions.visibilityOf(priceLeftSlider));
+         actions.clickAndHold(priceLeftSlider).moveByOffset(130, 0).release().perform();
+         actions.clickAndHold(priceRightSlider).moveByOffset(-150, 0).release().perform();
     }
 
     public void applyFurnishingFilter() {
@@ -63,34 +63,20 @@ public class FiltersPage extends PropertyListingPage {
     }
 
     public void applyPropertyTypeFilter() {
-        try {
-            js.executeScript("arguments[0].scrollIntoView(true);", propertyTypeHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(apartmentPropertyType));
-            js.executeScript("arguments[0].click();", apartmentPropertyType);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        js.executeScript("arguments[0].scrollIntoView(true);", propertyTypeHeading);
+        wait.until(ExpectedConditions.elementToBeClickable(apartmentPropertyType));
+        js.executeScript("arguments[0].click();", apartmentPropertyType);
     }
 
     public void applyParkingFilter() {
-        try {
-            js.executeScript("arguments[0].scrollIntoView(true);", parkingHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(parkingCheckbox));
-            js.executeScript("arguments[0].click();", parkingCheckbox);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        js.executeScript("arguments[0].scrollIntoView(true);", parkingHeading);
+        wait.until(ExpectedConditions.elementToBeClickable(parkingCheckbox));
+        js.executeScript("arguments[0].click();", parkingCheckbox);
     }
 
-    public boolean isFilteredListingVisible() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".card")));
-            List<WebElement> listings = driver.findElements(By.cssSelector(".card"));
-            return !listings.isEmpty() && listings.get(0).isDisplayed();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public void isListingVisible() {
+    	wait.until(ExpectedConditions.visibilityOfAllElements(getOwnerDetails));
+    	Assert.assertTrue(getOwnerDetails.size() > 0,"Property Listings should be displayed");
     }
 
 

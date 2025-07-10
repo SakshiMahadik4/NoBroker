@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="15.516" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-07-10T05:51:20.419168300Z">
+<testcase classname="Property Search and Interaction on Buy Page" name="Validate response for invalid locality search" time="14.923">
+<system-out><![CDATA[
+Given the user is on the NoBroker Buy page..................................passed
+When the user selects a valid city..........................................passed
+And the user enters invalid locality........................................passed
+And clicks the search button................................................passed
+Then the system should display an appropriate message Please select a locality within pune.passed
+]]></system-out>
+</testcase>
+</testsuite>

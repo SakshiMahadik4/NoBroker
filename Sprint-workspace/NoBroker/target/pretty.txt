@@ -1,0 +1,9 @@
+
+@valid
+Scenario Outline: Verify property search by valid city, locality, BHK type, and property status [90m# src/test/resource/Features/Buy.feature:15[0m
+  [32mGiven [0m[32mthe user is on the Buy page[0m                                                             [90m# com.stepDefinition.Profile.the_user_is_on_the_buy_page()[0m
+  [32mWhen [0m[32mthe user searches for properties with a valid city[0m                                       [90m# com.stepDefinition.Profile.the_user_searches_for_properties_with_a_valid_city()[0m
+  [32mAnd [0m[32muser searches for locality in selected city from excel with [0m[32m[1m"1"[0m                           [90m# com.stepDefinition.Profile.user_searches_for_locality_in_selected_city_from_excel_with(java.lang.String)[0m
+  [32mAnd [0m[32mthe user applies BHK type[0m                                                                 [90m# com.stepDefinition.Profile.the_user_applies_bhk_type()[0m
+  [32mAnd [0m[32mthe user applies property status filter[0m                                                   [90m# com.stepDefinition.Profile.the_user_applies_property_status_filter()[0m
+  [32mThen [0m[32mmatching property listings should be displayed[0m                                           [90m# com.stepDefinition.Profile.matching_property_listings_should_be_displayed()[0m

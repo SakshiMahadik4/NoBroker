@@ -1,5 +1,26 @@
 package com.parameters;
 
-public class ExcelReader {
+import java.io.FileInputStream;
 
-}
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ExcelReader {
+public static String locality(String sheetno,int rowno,int colno) {
+ 
+    	
+    	FileInputStream fis;
+		try {
+			fis = new FileInputStream("C:\\Windows\\System32\\config\\systemprofile\\Sprint-workspace\\NoBroker\\src\\test\\resource\\ExcelData\\Data.xlsx");
+			Workbook work=new XSSFWorkbook(fis);
+	    	Sheet sheet=work.getSheet(sheetno);
+	        return sheet.getRow(rowno).getCell(colno).getStringCellValue() ;
+		}
+    	catch(Exception e){
+    		e.printStackTrace();
+    		return "";
+    	}
+}}
+
+

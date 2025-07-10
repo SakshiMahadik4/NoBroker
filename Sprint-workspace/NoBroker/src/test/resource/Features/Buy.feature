@@ -2,13 +2,17 @@ Feature: Property Search and Interaction on Buy Page
 
 
 @valid
-  Scenario: Verify property search by valid city, locality, BHK type, and property status
+  Scenario Outline: Verify property search by valid city, locality, BHK type, and property status
     Given the user is on the Buy page
     When the user searches for properties with a valid city 
-    And user searches for locality in selected city
+    And user searches for locality in selected city from excel with "<RowIndex>"
     And the user applies BHK type 
     And the user applies property status filter
     Then matching property listings should be displayed
+    
+    Examples:
+    |RowIndex|
+    |1       |
 
 @filters
   Scenario: Verify filters like price, property type, furnishing, and parking work correctly
@@ -32,16 +36,11 @@ Feature: Property Search and Interaction on Buy Page
     And the user opens the wishlist page
     Then the property should be listed in the users wishlist
 
-@schedule 
-  Scenario: Verify user can schedule visit for a property
-    Given the user is logged in and viewing a property listing 
-    When the user clicks Schedule Visit
-    And selects a date from the calendar
-    Then the visit should be scheduled and confirmation should be shown
+@invalidData
+  Scenario: Validate response for invalid locality search 
+    Given the user is on the NoBroker Buy page
+    When the user selects a valid city
+    And the user enters invalid locality
+    And clicks the search button
+    Then the system should display an appropriate message Please select a locality within pune
 
-@invalid
-
-  Scenario: Verify unregistered user cannot contact owner or wishlist a property
-    Given the user is not logged in and viewing a property listing
-    When the user tries to contact owner or wishlist the property
-    Then the system should prompt the user to log in or register to perform those actions

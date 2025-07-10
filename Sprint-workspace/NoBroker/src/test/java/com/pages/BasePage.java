@@ -1,5 +1,6 @@
 package com.pages;
 
+import java.io.FileInputStream;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class BasePage {
 	
@@ -20,6 +22,7 @@ public class BasePage {
     WebDriverWait wait;
     JavascriptExecutor js;
     Actions actions;
+    Properties properties;
     
 	@FindBy(xpath = "//div[text()='Buy']")
 	public WebElement buyButton;
@@ -48,7 +51,8 @@ public class BasePage {
     @FindBy(xpath = "//button[normalize-space()='Search']")
     public WebElement searchButton;
 
-  
+    @FindBy(xpath = "//button[@class='w-full btn btn-primary btn-md']")
+    public List<WebElement> getOwnerDetails;
 
     @FindBy(xpath = "//*[@id='searchCity']/div/div[1]/div")
     public List<WebElement> bhkOptions;
@@ -57,35 +61,38 @@ public class BasePage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		 this.js = (JavascriptExecutor) driver;      
-		    this.actions = new Actions(driver);   
+		this.js = (JavascriptExecutor) driver;      
+		this.actions = new Actions(driver);
+		loadProperties();
 	}
-    
-//    private void loadProperties() {
-//    	try {
-//    		prop = new Properties();
-//    		FileInputStream fis = new 
-//    	}
-//    }
+ 
+    public void loadProperties() {
+        try {
+            properties = new Properties();
+            FileInputStream fis = new FileInputStream("C:\\Windows\\System32\\config\\systemprofile\\Sprint-workspace\\NoBroker\\src\\test\\resource\\Properties\\Buy.properties");
+            properties.load(fis);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    } 
 
 	public void goToBuyPage() {
        
         buyButton.click();
     }
 
-public void selectCity() {
+	public void selectCity() {
         cityBox.click();
-        js.executeScript("arguments[0].click();", puneOption);
+        puneOption.click();
     }
 
-public void enterLocality(String locality) {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(localityBox)).click();
-            localityBox.sendKeys(locality);
-            wait.until(ExpectedConditions.elementToBeClickable(localitySuggestion)).click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+	public void selectLocalityBox(){
+		wait.until(ExpectedConditions.elementToBeClickable(localityBox)).click();
+	}
+
+	public void enterLocality(String locality) {
+         localityBox.sendKeys(locality);
+         wait.until(ExpectedConditions.elementToBeClickable(localitySuggestion)).click();
     }
 
    public void selectBHK(int index) {
@@ -93,31 +100,19 @@ public void enterLocality(String locality) {
         bhkOptions.get(index).click();
     }
 
-public void applyPropertyStatus() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(propertyStatusDropdown)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(readyOption));
-            js.executeScript("arguments[0].click();", readyOption);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+   public void applyPropertyStatus() {
+         wait.until(ExpectedConditions.elementToBeClickable(propertyStatusDropdown)).click();
+         wait.until(ExpectedConditions.elementToBeClickable(readyOption));
+         js.executeScript("arguments[0].click();", readyOption);
     }
 
     public void clickSearch() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    	wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
     }
     
-    public boolean isListingVisible() {
-        try {
-            WebElement listing = driver.findElement(By.cssSelector(".card")); // or adjust locator
-            return listing.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+    public void isListingVisible() {
+    	wait.until(ExpectedConditions.visibilityOfAllElements(getOwnerDetails));
+    	Assert.assertTrue(getOwnerDetails.size() > 0,"Property Listings should be displayed");
     }
 
 }
