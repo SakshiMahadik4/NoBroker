@@ -2,6 +2,7 @@ package com.pages;
 
 import java.io.File;
 
+
 import java.io.IOException;
 import java.time.Duration;
 
@@ -17,9 +18,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
-
-	WebDriver driver;
-   
 	
 	@FindBy(xpath = "//input[@placeholder='Search a service']")
 	WebElement searchBox;
@@ -39,7 +37,7 @@ public class HomePage extends BasePage {
 
 	public HomePage(WebDriver driver) {
 		super(driver);
-		this.driver = driver;
+		
 	}
 
 	public void clickSearch() {
@@ -48,10 +46,9 @@ public class HomePage extends BasePage {
 
 	public void enterData() {
 	Actions action = new Actions(driver);
-	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    wait.until(ExpectedConditions.visibilityOf(searchBox));
+	waitUntilWebElementIsVisible(searchBox);
     action.sendKeys(searchBox, "AC Services").build().perform();
-    wait.until(ExpectedConditions.visibilityOf(img));
+    waitUntilWebElementIsVisible(img);
     action.click(img).build().perform();
 
 	}

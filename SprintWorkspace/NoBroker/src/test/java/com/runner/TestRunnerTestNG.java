@@ -8,12 +8,12 @@ glue="com.stepDefinition",
 
 plugin= {"pretty:target/pretty.txt",
 		
-		"html:target/cucumberreport/htmlreport.html",
+		"html:target/cucumberreport/htmlreport1.html",
 		
 		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 		})
 
 
 public class TestRunnerTestNG extends AbstractTestNGCucumberTests{
-
+    
 }
