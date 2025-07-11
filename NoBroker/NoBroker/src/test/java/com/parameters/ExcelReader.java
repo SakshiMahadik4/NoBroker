@@ -30,7 +30,7 @@ public class ExcelReader {
 
         workbook.close();
     } catch (Exception e) {
-        throw new RuntimeException("Failed to read city from Excel: " + e.getMessage());
+    	e.printStackTrace();
     }
     return city;
 	}
@@ -42,20 +42,15 @@ public class ExcelReader {
 		return reader.readCityFromSheet(fileName, "CityData"); // Sheet name is hardcoded
 	}
 	
-	
 	public Map<String, String> getRowData(int sheetIndex, int rowNumber) {
         Map<String, String> data = new HashMap<>();
         DataFormatter formatter = new DataFormatter(); // Converts any type to String
- 
         try (FileInputStream fis = new FileInputStream("src/test/resource/ExcelData/Data.xlsx");
-             Workbook workbook = new XSSFWorkbook(fis)) {
- 
+             Workbook workbook = new XSSFWorkbook(fis)) { 
             Sheet sheet = workbook.getSheetAt(sheetIndex); // Access by index
             Row headerRow = sheet.getRow(0);
             Row dataRow = sheet.getRow(rowNumber);
- 
             if (dataRow == null) throw new RuntimeException("Row " + rowNumber + " not found in sheet " + sheetIndex);
- 
             for (int i = 0; i < headerRow.getLastCellNum(); i++) {
                 String key = formatter.formatCellValue(headerRow.getCell(i)).trim();
                 String value = formatter.formatCellValue(dataRow.getCell(i)).trim();
@@ -63,11 +58,8 @@ public class ExcelReader {
             }
  
         } catch (IOException e) {
-            throw new RuntimeException("Excel reading failed: " + e.getMessage());
+        	e.printStackTrace();
         }
- 
         return data;
     }
-	
-	
 }

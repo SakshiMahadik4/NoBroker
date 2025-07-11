@@ -8,9 +8,9 @@ import io.cucumber.testng.CucumberOptions;
         tags = "@NoBroker",
         plugin = {
                 "pretty",
-                "html:target/CucumberReport.html",
-//                "json:target/CucumberReport.json",
-//        	    "junit:target/CucumberReport.xml",
+                "html:target/cucumberreport.html",
+                "json:target/CucumberReport.json",
+        	    "junit:target/CucumberReport.xml",									
         		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         }
 )

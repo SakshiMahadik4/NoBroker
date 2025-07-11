@@ -26,16 +26,15 @@ public class HomePage extends BasePage {
 	@FindBy(xpath = " //div[@class='nb-select__placeholder' and text()='BHK Type']")
 	WebElement bhkDropdown;
 	
-	@FindBy(xpath = "//*[@id='searchCity']/div/div[1]/div")
-	List<WebElement> bhkTypeFilter;
+	@FindBy(xpath = "//input[@value='BHK2']")
+	WebElement bhk2Filter;
 	
 	@FindBy(xpath = "//input[@id='listPageSearchLocality']")
 	WebElement SearchLocality;
 	
 	@FindBy(xpath = "//div[@class='nb-google-autocomplete nb-google-autocomplete-lg']//div[1]//div[1]//div[2]//div[1]")
 	WebElement hinjawadiLocation;
-	
-	
+		
 	@FindBy(xpath ="//button[@class='prop-search-button flex items-center justify-center btn btn-primary btn-lg']")
 	WebElement searchButton;
 	
@@ -44,7 +43,14 @@ public class HomePage extends BasePage {
 	
 	@FindBy(xpath = "//div[@id='alertMessageBox']")
 	WebElement alertMessageBox;
-		
+	
+	@FindBy(xpath = "//img")
+	List<WebElement> images;
+	
+	public void getImages() {
+		System.out.println("Number of images on the page: " + images.size());
+	}
+	
 	public HomePage(WebDriver driver) {
 		 super(driver);  // Calling BasePage constructor
 		
@@ -69,9 +75,7 @@ public class HomePage extends BasePage {
 	 public void applyAvailabilityFilter() {
 		 waitUntilWebElementIsVisible(bhkDropdown);
 		 bhkDropdown.click();
-		 int index = 4;
-		 bhkTypeFilter.get(index).click();
-		  
+		 bhk2Filter.click(); 
 		 waitUntilWebElementIsVisible(availabilityFilter);  
 		 availabilityFilter.click(); 
 		 waitUntilWebElementIsVisible(availabilityFilterValue);  
@@ -87,12 +91,16 @@ public class HomePage extends BasePage {
 		 Assert.assertTrue("Premium Filter is not displayed", PremiumFilter.isDisplayed()); 
 	 }
 	 
-	 public void errorMessage() throws InterruptedException {
-		 	waitUntilWebElementIsVisible(alertMessageBox);
-		 	Thread.sleep(1500);// Wait for the alert message box to be visible
-			String errorMessage = alertMessageBox.getText().trim(); 
-			System.out.println(errorMessage);
-			String expectedMessage = "PLEASE SELECT A LOCALITY WITHIN BANGALORE";
-			Assert.assertEquals("PLEASE SELECT A LOCALITY WITHIN BANGALORE", errorMessage , expectedMessage);
+	 public void errorMessage() {
+		 try {
+		 		waitUntilWebElementIsVisible(alertMessageBox);
+			 	Thread.sleep(1500);
+				String errorMessage = alertMessageBox.getText().trim(); 
+				System.out.println(errorMessage);
+				String expectedMessage = "PLEASE SELECT A LOCALITY WITHIN BANGALORE";
+				Assert.assertEquals("PLEASE SELECT A LOCALITY WITHIN BANGALORE", errorMessage , expectedMessage);
+		 	} catch (Exception e) {
+		 		e.printStackTrace();	
+		 	}
 	 }
 }

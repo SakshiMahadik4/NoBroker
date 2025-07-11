@@ -66,10 +66,7 @@ public class LoanPage extends BasePage{
 	
 	public LoanPage(WebDriver driver) {
 		super(driver); // Calling BasePage constructor
-		
-		
 	}
-	
 	public void propertyListing() {
 		waitUntilWebElementIsVisible(propertyPage);
 		propertyPage.click();
@@ -79,13 +76,16 @@ public class LoanPage extends BasePage{
 		waitUntilWebElementIsVisible(ApplyLoan);
 		ApplyLoan.click();
 	}
-	public void enterMobileNumber() throws InterruptedException {
-		waitUntilWebElementIsVisible(mobileNumberInput);
-		mobileNumberInput.sendKeys(config.propertyReaderMethod().getProperty("phoneNumber"));
-		Thread.sleep(15000); 
-		signUpSubmitButton.click();
-	}
-	
+	public void enterMobileNumber() {
+		try {
+			waitUntilWebElementIsVisible(mobileNumberInput);
+			mobileNumberInput.sendKeys(config.propertyReaderMethod().getProperty("phoneNumber"));
+			Thread.sleep(18000); 
+			signUpSubmitButton.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
 	public void fillForm(String amount) {
 		waitUntilWebElementIsVisible(SelectCityDropdown);
 		SelectCityDropdown.click(); 
@@ -136,8 +136,5 @@ public class LoanPage extends BasePage{
 		String incomeErrorMessage = SelectIncomeError.getText().trim();
 		String expectedIncomeErrorMessage = "Please select income";
 		Assert.assertEquals("Please select income", incomeErrorMessage, expectedIncomeErrorMessage);
-	}
-	 public void reloadPage() {
-	        driver.navigate().refresh();
-	}	 
+	} 
 }

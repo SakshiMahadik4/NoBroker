@@ -28,10 +28,11 @@ public class PropertyPage extends BasePage{
 	
 	    }
 		public void applyFilters() {
-			waitUntilWebElementIsVisible(bhk4PlusFilter);  // Wait for the filter to be visible
-			bhk4PlusFilter.click();  // Click on the BHK4PLUS filter
-	        //  Drag left handle slightly right 
-			Actions actions = new Actions(driver);
+			waitUntilWebElementIsVisible(bhk4PlusFilter); 
+			bhk4PlusFilter.click(); 
+	       
+			//  Drag left handle slightly right 
+			actions = new Actions(driver);
 	        actions.clickAndHold(leftHandle).moveByOffset(80, 0).release().perform();
 	 
 	        //  Drag right handle slightly left

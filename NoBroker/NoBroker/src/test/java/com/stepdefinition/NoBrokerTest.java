@@ -3,7 +3,6 @@ package com.stepdefinition;
 import java.awt.AWTException;
 import java.util.Map;
 import java.util.Properties;
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -37,6 +36,16 @@ public class NoBrokerTest {
 		excelReader = new ExcelReader();
 		baseSetup = new BaseSteps();		
 	}
+	
+	
+	// ---------------------------------Seanario 6------------------------------------------------------------
+		/*
+		 * Created by: Kanishk Vats
+		 * Reviewed by: Preeti
+		 * Motive:Validate the Rent Module
+		 *  /
+		 */
+	 
 	
 	@Given("User is on the homepage")
 	public void user_is_on_the_homepage() throws InterruptedException {
@@ -127,8 +136,7 @@ public class NoBrokerTest {
 	    Map<String, String> data = reader.getRowData(int1.intValue(), int2.intValue());
  
 	    String amount = data.get("amount");
-		loanPage.fillForm(amount);
-	    //loanPage.fillLoanFormWithValidData(amount);	 
+		loanPage.fillForm(amount); 
 	}
 	@When("submits the form")
 	public void submits_the_form() {
