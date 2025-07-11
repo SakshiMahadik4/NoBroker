@@ -5,10 +5,11 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features="C:\\Windows\\System32\\config\\systemprofile\\SprintWorkspace\\NoBroker\\src\\test\\resource\\Features\\Painting&Cleaning.feature",
 glue="com.stepDefinition",
+tags="@Cleaningservice",
 
 plugin= {"pretty:target/pretty.txt",
 		
-		"html:target/cucumberreport/htmlreport1.html",
+		"html:target/cucumberreport/htmlreport7.html",
 		
 		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 		})

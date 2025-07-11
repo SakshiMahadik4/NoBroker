@@ -34,9 +34,10 @@ public class NoBrokerTest {
 
 	// ---------------------------------Seanario 1------------------------------------------------------------
 	/*
-	 * Created by:
-	 * Reviewed by: 
-	 * Motive: /
+	 * Created by:Pranali Chougule
+	 * Reviewed by:Priti Wadpalli 
+	 * Motive:To validate search funcionality
+	 *  /
 	 */
 	@Given("The user is on home services page")
 	public void the_user_is_on_home_services_page() {
@@ -62,9 +63,10 @@ public class NoBrokerTest {
 
 	// ------------------------------------Seanario 2----------------------------------------------------------
 	/*
-	 * Created by: 
-	 * Reviewed by: 
-	 * Motive: /
+	 * Created by:Pranali Chougule 
+	 * Reviewed by:Priti Wadpalli
+	 * Motive: Validate city dropdown visibility and selection
+	 *  /
 	 */
 
 	@Given("user is on home Services page")
@@ -90,9 +92,10 @@ public class NoBrokerTest {
 
 	// ---------------------------------Seanario 3------------------------------------------------------------
 		/*
-		 * Created by:
-		 * Reviewed by: 
-		 * Motive: /
+		 * Created by:Pranali Chougule
+		 * Reviewed by:Priti Wadpalli 
+		 * Motive:Validate that the user can request an estimate for a selected painting service
+		 *  /
 		 */
 	@Given("the user is on the home services page")
 	public void the_user_is_on_the_home_services_page() {
@@ -122,9 +125,10 @@ public class NoBrokerTest {
 
 	// ---------------------------------Seanario 4------------------------------------------------------------
 			/*
-			 * Created by:
-			 * Reviewed by: 
-			 * Motive: /
+			 * Created by:Pranali Chougule
+			 * Reviewed by:Priti Wadpalli 
+			 * Motive:Validate the corporate form
+			 *  /
 			 */
 	@Given("User is on services page")
 	public void user_is_on_services_page() {
@@ -167,9 +171,10 @@ public class NoBrokerTest {
 	
 	// ---------------------------------Seanario 5------------------------------------------------------------
 				/*
-				 * Created by:
-				 * Reviewed by: 
-				 * Motive: /
+				 * Created by:Pranali Chougule
+				 * Reviewed by:Priti Wadpalli
+				 * Motive: Validate the post property form with invalid data
+				 *  /
 				 */
 	@When("the user clicks on the Book option")
 	public void the_user_clicks_on_the_book_option() {
@@ -196,9 +201,10 @@ public class NoBrokerTest {
 	
 	// ---------------------------------Seanario 6------------------------------------------------------------
 	/*
-	 * Created by:
-	 * Reviewed by: 
-	 * Motive: /
+	 * Created by:Pranali Chougule
+	 * Reviewed by:Priti Wadpalli
+	 * Motive:Validate the cleaning services checkout process
+	 *  /
 	 */
 	
 	@When("the user clicks Rental Agreement option")
