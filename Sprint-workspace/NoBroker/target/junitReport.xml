@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="15.516" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-07-10T05:51:20.419168300Z">
-<testcase classname="Property Search and Interaction on Buy Page" name="Validate response for invalid locality search" time="14.923">
+<testsuite name="Cucumber" time="229.852" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-07-11T05:39:16.611569900Z">
+<testcase classname="Property Search and Interaction on Buy Page" name="Verify property search by valid city, locality, BHK type, and property status - #1.1" time="26.17">
+<system-out><![CDATA[
+Given the user is on the Buy page...........................................passed
+When the user searches for properties with a valid city.....................passed
+And user searches for locality in selected city from excel with "1".........passed
+And the user applies BHK type...............................................passed
+And the user applies property status filter.................................passed
+Then matching property listings should be displayed.........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Property Search and Interaction on Buy Page" name="Verify filters like price, property type, furnishing, and parking work correctly" time="28.569">
+<system-out><![CDATA[
+Given the user is on the Buy page and viewing listings......................passed
+When the user applies filters for a price filter............................passed
+And the user applies Property type filter...................................passed
+And the user applies Furnishing filter......................................passed
+And the user applies Parking filter.........................................passed
+Then the listings should update to reflect the applied filters..............passed
+]]></system-out>
+</testcase>
+<testcase classname="Property Search and Interaction on Buy Page" name="Verify user can contact owner using Get Owner Details button" time="72.402">
+<system-out><![CDATA[
+Given the user is logged in and viewing a property listing..................passed
+When the user clicks the Get Owner Details button...........................passed
+Then the owners contact information should be displayed.....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Property Search and Interaction on Buy Page" name="Verify user can wishlist a property" time="85.605">
+<system-out><![CDATA[
+Given the user is logged in and viewing a property listing page.............passed
+When the user clicks the Wishlist button....................................passed
+And the user opens the wishlist page........................................passed
+Then the property should be listed in the users wishlist....................passed
+]]></system-out>
+</testcase>
+<testcase classname="Property Search and Interaction on Buy Page" name="Validate response for invalid locality search" time="16.545">
 <system-out><![CDATA[
 Given the user is on the NoBroker Buy page..................................passed
 When the user selects a valid city..........................................passed

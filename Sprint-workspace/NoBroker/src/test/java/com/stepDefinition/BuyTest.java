@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.pages.BasePage;
 import com.pages.PropertyListingPage;
-import com.pages.ScheduleVisitPage;
 import com.parameters.ExcelReader;
 import com.pages.FiltersPage;
 import com.pages.HomePage;
@@ -29,10 +28,15 @@ public class BuyTest {
     BasePage basepage;
     FiltersPage filterpage;
     PropertyListingPage listingpage;
-    ScheduleVisitPage schedulevisitpage;
     HomePage homepage;
 
     // ---------------- Scenario 1 ----------------
+    /*created by:Jhalak Maheshwari
+     * Reviewed by:
+     * Motive:Verify property search by valid city, locality, BHK type, and property status
+     */
+    
+    
     @Given("the user is on the Buy page")
     public void the_user_is_on_the_buy_page() {
         driver = BaseSteps.chromedriver();
@@ -70,6 +74,11 @@ public class BuyTest {
     }
 
     // --------------------------- Scenario 2 ------------------------------------------------------------------------------
+    /*created by:Jhalak Maheshwari
+     * Reviewed by:
+     * Motive:Verify filters like price, property type, furnishing, and parking work correctly
+     */
+    
     @Given("the user is on the Buy page and viewing listings")
     public void the_user_is_on_the_buy_page_and_viewing_listings() {
         driver = BaseSteps.chromedriver();  
@@ -103,7 +112,10 @@ public class BuyTest {
     }
 
     // ---------------- Scenario 3 ------------------------------------------------------------------------------------
-
+    /*created by:Jhalak Maheshwari
+     * Reviewed by:
+     * Motive:Verify user can contact owner using Get Owner Details button
+     */
     
     @Given("the user is logged in and viewing a property listing")
     public void the_user_is_logged_in_and_viewing_a_property_listing() {
@@ -116,7 +128,7 @@ public class BuyTest {
     @When("the user clicks the Get Owner Details button")
     public void the_user_clicks_the_get_owner_details_button() {
     	listingpage.scrollToListings();
-       // listingpage.clickGetOwnerDetails(1);
+        listingpage.clickGetOwnerDetails(1);
     }
     @Then("the owners contact information should be displayed")
     public void the_owners_contact_information_should_be_displayed() {
@@ -124,7 +136,10 @@ public class BuyTest {
     }
 
     //------------------------------Scenario 4-----------------------------------------------------------------------------
-
+    /*created by:Jhalak Maheshwari
+     * Reviewed by:
+     * Motive:Verify user can wishlist a property
+     */
     
     @Given("the user is logged in and viewing a property listing page")
     public void the_user_is_logged_in_and_viewing_a_property_listing_page() {
@@ -151,7 +166,10 @@ public class BuyTest {
 
     
     //--------------------Scenario 5----------------------------------------------------------------------------------
-    
+    /*created by:Jhalak Maheshwari
+     * Reviewed by:
+     * Motive:Validate response for invalid locality search
+     */
     @Given("the user is on the NoBroker Buy page")
     public void the_user_is_on_the_no_broker_buy_page() {
     	driver = BaseSteps.chromedriver();
@@ -175,7 +193,7 @@ public class BuyTest {
     	homepage.invalidData();
     }
     @AfterStep
-	public void tearDown(Scenario scenario) // wil take screenshots for each and every scenario
+	public void tearDown(Scenario scenario) // will take screenshots for each and every scenario
 	{
 		final byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
 		scenario.attach(screenshot, "image/png", "Image");
